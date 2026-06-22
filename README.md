@@ -1,4 +1,4 @@
-# YCFxAI Hackathon 2026 - Innovation Dashboard
+# YCFxAI Hackathon 2026 - Innovation Dashboard by XiaoQian Lyu and Myriam Bensouri
 
 This project is an interactive single-page web application developed for **Track 05 (Open Track)** of the YCFxAI Hackathon 2026, hosted by the Youth Code Foundation. 
 
