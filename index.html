@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YCFxAI 2026 - Innovation Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+        .action-btn {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+        }
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+        }
+        .action-btn:active {
+            transform: translateY(0);
+        }
+        .output-box {
+            margin-top: 35px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px dashed rgba(148, 163, 184, 0.2);
+            padding: 25px;
+        }
+        .placeholder-text {
+            color: #64748b;
+            font-style: italic;
+        }
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: #818cf8;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .idea-card {
+            text-align: left;
+            width: 100%;
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .idea-title {
+            color: #38bdf8;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .idea-tag {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .idea-desc {
+            color: #e2e8f0;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        .features-title {
+            color: #c084fc;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .feature-list {
+            list-style: none;
+        }
+        .feature-list li {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 20px;
+        }
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #34d399;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>YCFxAI Concept Generator</h1>
+    <div class="subtitle">Track 05: Open Entrepreneurial Prototype</div>
+    
+    <button class="action-btn" id="generateBtn">Generate AI Project Blueprint</button>
+    
+    <div class="output-box" id="outputBox">
+        <div class="spinner" id="loadingSpinner"></div>
+        <div class="placeholder-text" id="placeholderText">Click the button above to run the generative matrix engine.</div>
+        <div id="resultContent"></div>
+    </div>
+</div>
+
+<script>
+    const data = [
+        {
+            title: "EduPulse AI",
+            tag: "Education Tech",
+            desc: "An intelligent study dashboard that captures lecture audio streams, filters background noise, and instantly formats chronological summaries, study flashcards, and mock exam templates.",
+            features: ["Real-time audio processing text conversion", "Automatic multi-tier summary generation", "Personalized space-repetition review system"]
+        },
+        {
+            title: "EcoTrack Smart-Bin",
+            tag: "Sustainability & IoT",
+            desc: "A mobile application concept connected to local community databases that utilizes computer vision to identify domestic items and reveal precise environmental disposal paths.",
+            features: ["Camera-based material classification matrix", "Local carbon offset reward point allocation", "Interactive neighborhood ranking leaderboards"]
+        },
+        {
+            title: "MindFlow Assistant",
+            tag: "Mental Health Support",
+            desc: "A conversational wellness mechanism designed to assess daily cognitive stress markers through micro-journal entries, recommending personalized kinetic behavioral tracking patterns.",
+            features: ["Anonymized linguistic sentiment analysis engines", "Adaptive breathing calibration protocols", "Encrypted digital safe storage lockers"]
+        },
+        {
+            title: "GigMatch Protocol",
+            tag: "Career Development",
+            desc: "A decentralized pipeline optimizing talent matching parameters by evaluating code structures and design samples to connect students directly with open entrepreneurial assignments.",
+            features: ["Portfolio deep-scanning diagnostic parser", "Automated freelance micro-contract templates", "Skill gap diagnostic path visualizations"]
+        }
+    ];
+
+    const btn = document.getElementById("generateBtn");
+    const spinner = document.getElementById("loadingSpinner");
+    const placeholder = document.getElementById("placeholderText");
+    const result = document.getElementById("resultContent");
+
+    btn.addEventListener("click", () => {
+        placeholder.style.display = "none";
+        result.innerHTML = "";
+        spinner.style.display = "block";
+        btn.disabled = true;
+
+        setTimeout(() => {
+            spinner.style.display = "none";
+            btn.disabled = false;
+
+            const randomItem = data[Math.floor(Math.random() * data.length)];
+            
+            let listItems = "";
+            randomItem.features.forEach(f => {
+                listItems += `<li>${f}</li>`;
+            });
+
+            result.innerHTML = `
+                <div class="idea-card">
+                    <div class="idea-title">${randomItem.title}</div>
+                    <div class="idea-tag">${randomItem.tag}</div>
+                    <div class="idea-desc">${randomItem.desc}</div>
+                    <div class="features-title">Core Architecture Features</div>
+                    <ul class="feature-list">${listItems}</ul>
+                </div>
+            `;
+        }, 800);
+    });
+</script>
+
+</body>
+</html>
